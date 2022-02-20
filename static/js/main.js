@@ -1,35 +1,6 @@
 // alert('ahh');
 var uscCoord = [34.02210372599966, -118.28610378009327]
 
-// function readSingleFile(f) {
-//     var file = f.target.files[0];
-//     if (!file) {
-//         return;
-//     }
-//     var reader = new FileReader();
-//     reader.onload = function(f) {
-//         var contents = f.target.result;
-//         displayContents(contents);
-//     };
-//     reader.readAsText(file);
-//     return reader;
-// }
-// function displayContents(contents) {
-//     console.log(contents);
-//     var markers = JSON.parse(contents);
-//    var element = document.getElementById('file-content');
-//    element.textContent = contents;
-// }
-
-// document.getElementById('file-input').addEventListener('change', readSingleFile, false);
-
-// var result = JSON.parse()
-
-// let reader = new FileReader();
-// reader.readAsText("input.json");
-// reader.onload = function() {
-//     console.log(reader.result);
-//     };
 result = [
   {
     "name": "Jady's Tree",
