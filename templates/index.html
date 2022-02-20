@@ -2,17 +2,29 @@
 <html>
 
 <head>
-	<title>PinUSC</title>
+    <title>PinUSC</title>
+    <img src="./static/images/logo.JPG" style="width: 50px; height: 50px;" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="../static/css/style.css" />
     <style type="text/css">
-        .checkboxs {width:100px; display: inline;}
-        button { height: 30px; width: 40px; border: 1px;}
-        button:hover { color: gray;}
+        .checkboxs {
+            width: 100px;
+            display: inline;
+        }
+
+        button {
+            height: 30px;
+            width: 40px;
+            border: 1px;
+        }
+
+        /* <button:hover {
+            color: gray;
+        }> */
     </style>
 
     <script type="text/javascript">
@@ -20,71 +32,123 @@
         function sendRequest(queryCols) {
             console.log(queryCols + ' sendRequest');
             var req = new XMLHttpRequest();
-            req.onreadystatechange = function(){
-            // run callback if request success
-            if (this.readyState == 4 && this.status == 200) {
-                var result = JSON.parse(this.responseText);
-                console.log(result);
-                // fillFunction(result);
-                // console.log(result);
-            };
+            req.onreadystatechange = function () {
+                // run callback if request success
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = JSON.parse(this.responseText);
+                    console.log(result);
+                    // fillFunction(result);
+                    // console.log(result);
+                };
             }
 
             // handle request asynchronously.
             // req.open('GET', '/'+route+'/'+companyName, true);
-            req.open('GET', '/query/'+queryCols, true);
+            req.open('GET', '/query/' + queryCols, true);
             // req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             req.send();
         }
 
-        async function clickSubmit(){
+        async function clickSubmit() {
             console.log('click submit button');
-            var queryText ='';
+            var queryText = '';
             var checkboxes = document.getElementsByClassName("checkbox");
             for (i = 0; i < checkboxes.length; i++) {
-              console.log(checkboxes[i].checked + ' ' + checkboxes[i].value + ' ' + checkboxes[i].checked==true);
-              if (checkboxes[i].checked == true){
-                queryText  = queryText.length===0 ? checkboxes[i].value : queryText+' '+checkboxes[i].value;
-              }
+                console.log(checkboxes[i].checked + ' ' + checkboxes[i].value + ' ' + checkboxes[i].checked == true);
+                if (checkboxes[i].checked == true) {
+                    queryText = queryText.length === 0 ? checkboxes[i].value : queryText + ' ' + checkboxes[i].value;
+                }
             };
             console.log('queryText in clickSubmit' + queryText);
             sendRequest(queryText);
             resetCheckbox();
         }
 
-        function resetCheckbox(){
-          var checkboxes = document.getElementsByClassName("checkbox");
+        function resetCheckbox() {
+            var checkboxes = document.getElementsByClassName("checkbox");
             for (i = 0; i < checkboxes.length; i++) {
-              checkboxes[i].cheked = false;
+                checkboxes[i].cheked = false;
             }
         }
     </script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+        a {
+            color: #1772d0;
+            text-decoration: none;
+        }
+
+        a:focus,
+        a:hover {
+            color: #f09228;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: "Nunito";
+            font-size: 16px;
+        }
+
+        div {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        img {
+            border-radius: 10px;
+            box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .exp {
+            width: 290px;
+        }
+
+        .circleimg {
+            width: 120px;
+            border-radius: 50%;
+        }
+
+        .pub img {
+            width: 250px;
+        }
+
+        .pub .txt {
+            padding-left: 35px;
+            width: 600px;
+            text-align: left;
+        }
+    </style>
+
+
 </head>
 
-<body>
-    <h1>PinUSC</h1>
+<body style="width: 950px; margin: auto; padding-top: 20px;">
+    <center>
+        <h1 style="color:#C466DF">PinUSC</h1>
+    </center>
     <i class="fa-solid fa-envelope"></i>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 
     <form class="checkboxWrapper" onsubmit="clickSubmit();return false">
         <div class="chechboxs">
             <p>Eat</p>
             <input class="checkbox" type="checkbox" value="restaurants"> Resturant</input>
-            <input class="checkbox" type="checkbox"  value="seating"> Seating</input>
+            <input class="checkbox" type="checkbox" value="seating"> Seating</input>
         </div>
         <div class="chechboxs">
             <p>Study</p>
             <input class="checkbox" type="checkbox" value="outlet"> Outlet</input>
-            <input class="checkbox" type="checkbox"  value="indoor"> Indoor</input>
-            <input class="checkbox" type="checkbox"  value="outdoor"> Outdoor</input>
-            <input class="checkbox" type="checkbox"  value="silence"> Silence</input>
+            <input class="checkbox" type="checkbox" value="indoor"> Indoor</input>
+            <input class="checkbox" type="checkbox" value="outdoor"> Outdoor</input>
+            <input class="checkbox" type="checkbox" value="silence"> Silence</input>
         </div>
         <div class="chechboxs">
             <p>Relax</p>
             <input class="checkbox" type="checkbox" value="sleep"> Sleep</input>
-            <input class="checkbox" type="checkbox"  value="sleep"> Sports </input>
+            <input class="checkbox" type="checkbox" value="sleep"> Sports </input>
         </div>
         <div class="chechboxs">
             <input class="checkbox" type="checkbox" value="landmark"> Landmark </input>
@@ -96,6 +160,228 @@
 
     <div id="map"></div>
     <script src="../static/js/main.js"> </script>
+    <br />
+    <br />
+    <hr />
+    <center>
+        <h1 style="color:#C466DF">Ideas of PinUSC</h1>
+    </center>
+    <center>
+        <div class="pub">
+            <div>
+                <img src="./static/images/img1.png" />
+            </div>
+            <div class="txt">
+                <b style="font-size: 18px;">Inspiration</b><br />
+                <p>
+                    In every semester, there are many new incoming students are not familiar with the USC environment
+                    when they just
+                    enter into USC. We were one of them! We spent multiple days to explore the campus, finding classroom
+                    building,
+                    and get to know where is available to dine in, and where is a suitable place with outlet for
+                    studying, and so
+                    on.
+                </p>
+                <p>
+                    Therefore, we come up an idea to create “pinUSC” web app. It’s an interactive web app where
+                    users can find
+                    locations based on their preference. Our ultimate goal is to design a powerful platform for students
+                    or visitors
+                    to find places, and get to involved in the campus life more easily.
+                </p>
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+    <center>
+        <div class="pub">
+            <div>
+                <img src="./static/images/img2.png" />
+            </div>
+            <div class="txt">
+                <b style="font-size: 18px;">The features of “pinUSC”</b><br />
+                <p>
+                    Users can use this web app to find multiple functions which are not yet available on Google map.
+                    Firstly, users
+                    can utilize the filter functions to find their preferred food, study, or relax places with
+                    additional
+                    constraint. These pinned locations are probably not notable enough to be showed on Google Map, but
+                    it might be a
+                    cozy and amazing corner for students to take a rest, and have meals. Secondly, there are panoramic
+                    or 360°
+                    photos on each locations for users to easy find their destination. Also, users can get interactive
+                    virtual
+                    experiences before their visit. Lastly, users can easily add other landmark or location to the map,
+                    and provide
+                    their review on their visited locations for future visitor’s reference.
+                </p>
+
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+
+    <center>
+        <div class="pub">
+            <div>
+                <img src="./static/images/img3.png" />
+            </div>
+            <div class="txt">
+                <b style="font-size: 18px;">Tools we used</b><br />
+                <p>
+                    HTML, CSS, Azure, Python Flask
+                </p>
+                <b style="font-size: 18px;">How we built</b><br />
+                <p>
+                    We used an open-source JavaScript library, Leaflet for implemented interactive maps, and customized
+                    it with the
+                    markers information from Azure databases. Also, we used Python Flask for the framework of web
+                    application. We
+                    also utilized HTML, CSS, and JavaScript for our front-end design, and functions.
+                </p>
+
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+
+    <center>
+        <div class="pub">
+            <div>
+                <img src="./static/images/img4.png" />
+            </div>
+            <div class="txt">
+                <b style="font-size: 18px;">Challenges we confronted</b><br />
+                <p>
+                    This is our first hackathon activity, and it’s our first time learn to integrate front-end,
+                    database, and
+                    back-end tools into an interactive web app. We spent much time on brainstorming a project topic,
+                    constructing
+                    our ideas and selecting tools.
+                </p>
+                <b style="font-size: 18px;">What we learned</b><br />
+                <p>
+                    Through our first hackathon experience, we learned how to integrate different tools into a
+                    full-stack project.
+                    We deepen our practical skills on using API, JavaScript, UI/UX design and CSS skills. We also
+                    learned how to use
+                    Python Flask as framework for building web applications.
+                </p>
+
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+
+    <center>
+        <div class="pub">
+            <div>
+                <img src="./static/images/img5.png" />
+            </div>
+            <div class="txt">
+                <b style="font-size: 18px;">The next step for our web App “pinUSC”</b><br />
+                <p>
+                <ul>
+                    <li>
+                        Add a chatbot which can collect the request information from users, and provide a suggestion
+                        based on
+                        users’
+                        requests.
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        Integrate an optimized recommendation system based on distance, review and open hour to
+                        recommend
+                        locations
+                        to
+                        users.
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        Add a function for users to choose if they’d like to find study partners, or friends to enjoy
+                        food or
+                        exercise
+                        together when they arrive their destination.
+                    </li>
+                </ul>
+                </p>
+
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+
+    <hr />
+    <center>
+        <h1 style="color:#C466DF">
+    </center>
+    Our Team
+    </h1>
+    <center>
+        <!--ppl1-->
+        <div class="exp">
+            <p>
+                <img class="circleimg" src="./static/images/rita.jpeg" />
+            </p>
+            <b style="font-size: 18px;"><a href="https://www.linkedin.com/in/naicih-lio" target="_blank">Rita
+                    Liou</a></b><br />
+            USC M.S. ADS student<br />
+            Job: Database, Back-end
+            <p>
+                <a href="https://www.linkedin.com/in/naicih-lio"><img
+                        src="https://img.shields.io/badge/-Rita%20Liou-0077B5?style=flat&logo=Linkedin&logoColor=white" /></a>
+                <a href="mailto:naicihli@usc.edu"><img
+                        src="https://img.shields.io/badge/-naicihli@usc.edu-D14836?style=flat&logo=Gmail&logoColor=white" /></a>
+            </p>
+        </div>
+
+        <!--ppl2-->
+        <div class="exp">
+            <p>
+                <img class="circleimg" src="./static/images/jady.jpeg" />
+            </p>
+            <b style="font-size: 18px;"><a href="https://www.linkedin.com/in/htsao/" target="_blank">Jady
+                    Tsao</a></b><br />
+            USC M.S. CS student<br />
+            Job: API processing, Front-end
+            <p>
+                <a href="https://www.linkedin.com/in/htsao/"><img
+                        src="https://img.shields.io/badge/-Jady%20Tsao-0077B5?style=flat&logo=Linkedin&logoColor=white" /></a>
+                <a href="mailto:hsichint@usc.edu"><img
+                        src="https://img.shields.io/badge/-hsichint@usc.edu-D14836?style=flat&logo=Gmail&logoColor=white" /></a>
+            </p>
+        </div>
+
+        <!--ppl3-->
+        <div class="exp">
+            <p>
+                <img class="circleimg" src="./static/images/ashley.jpg" />
+            </p>
+            <b style="font-size: 18px;"><a href="https://www.linkedin.com/in/yuhsuan-ashley-lu/" target="_blank">Ashley
+                    Lu</a></b><br />
+            USC M.S. CS student<br />
+            Job: Front-end, Back-end
+            <p>
+                <a href="https://www.linkedin.com/in/yuhsuan-ashley-lu/"><img
+                        src="https://img.shields.io/badge/-Ashley%20Lu-0077B5?style=flat&logo=Linkedin&logoColor=white" /></a>
+                <a href="mailto:luyuhsua@usc.edu"><img
+                        src="https://img.shields.io/badge/-luyuhsua@usc.edu-D14836?style=flat&logo=Gmail&logoColor=white" /></a>
+            </p>
+
+        </div>
+
+
+    </center>
+
+    <br />
+    <br />
 
 </body>
 
