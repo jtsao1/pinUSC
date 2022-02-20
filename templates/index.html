@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PinUSC</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style type="text/css">
+        .checkboxs {width:100px; display: inline;}
+        button { height: 30px; width: 40px; color: #ddd; background-color: white; border: 0px;}
+        button:hover { color: gray;}
+    </style>
+
+    <script type="text/javascript">
+        // search with ajax and XMLHttpRequest
+        function sendRequest(queryCols) {
+            console.log(queryCols + ' sendRequest');
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function(){
+            // run callback if request success
+            if (this.readyState == 4 && this.status == 200) {
+                var result = JSON.parse(this.responseText);
+                console.log(result);
+                // fillFunction(result);
+                // console.log(result);
+            };     
+            }
+
+            // handle request asynchronously.
+            // req.open('GET', '/'+route+'/'+companyName, true);
+            req.open('GET', '/query/'+queryCols, true);
+            // req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            req.send();
+        }
+
+        async function clickSubmit(){
+            console.log('click submit button');
+            var queryText ='';
+            var checkboxes = document.getElementsByClassName("checkbox");
+            for (i = 0; i < checkboxes.length; i++) {
+              console.log(checkboxes[i].checked + ' ' + checkboxes[i].value + ' ' + checkboxes[i].checked==true);
+              if (checkboxes[i].checked == true){
+                queryText  = queryText.length===0 ? checkboxes[i].value : queryText+' '+checkboxes[i].value;
+              }
+            };
+            console.log('queryText in clickSubmit' + queryText);
+            sendRequest(queryText);
+            resetCheckbox();
+        }
+
+        function resetCheckbox(){
+          var checkboxes = document.getElementsByClassName("checkbox");
+            for (i = 0; i < checkboxes.length; i++) {
+              checkboxes[i].cheked = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>PinUSC</h1>
+    <i class="fa-solid fa-envelope"></i>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    
+    <form class="checkboxWrapper" onsubmit="clickSubmit();return false">
+        <div class="chechboxs">
+            <p>Eat</p>
+            <input class="checkbox" type="checkbox" value="restaurants"> Resturant</input>
+            <input class="checkbox" type="checkbox"  value="seating"> Seating</input>
+        </div>
+        <div class="chechboxs">
+            <p>Study</p>
+            <input class="checkbox" type="checkbox" value="outlet"> Outlet</input>
+            <input class="checkbox" type="checkbox"  value="indoor"> Indoor</input>
+            <input class="checkbox" type="checkbox"  value="outdoor"> Outdoor</input>
+            <input class="checkbox" type="checkbox"  value="silence"> Silence</input>
+        </div>
+        <div class="chechboxs">
+            <p>Relax</p>
+            <input class="checkbox" type="checkbox" value="sleep"> Sleep</input>
+            <input class="checkbox" type="checkbox"  value="sleep"> Sports </input>
+        </div>
+        <div class="chechboxs">
+            <input class="checkbox" type="checkbox" value="landmark"> Landmark </input>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" value="Submit"></button>
+    </form>
+    
+    <div id="map"></div>
+    <script src="../static/js/main.js"> </script>
+
+</body>
+
+</html>
