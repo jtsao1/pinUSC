@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Jady's Trying</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style type="text/css">
+        .checkboxs {width:100px; display: inline;}
+    </style>
+
+    <script type="text/javascript">
+        // search with ajax and XMLHttpRequest
+        function sendRequest(queryText) {
+            console.log(queryText + ' sendRequest');
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function(){
+            // run callback if request success
+            if (this.readyState == 4 && this.status == 200) {
+                var result = JSON.parse(this.responseText);
+                fillFunction(result);
+                // console.log(result);
+            };     
+            }
+
+            // handle request asynchronously.
+            req.open('GET', '/'+route+'/'+query, true);
+            // req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            req.send();
+        }
+
+        async function clickSubmit(){
+            console.log('click submit button');
+            var queryText ='';
+            var checkboxes = document.getElementsByClassName("checkbox");
+            for (i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked == true){ 
+                    queryText  = queryText + checkboxes[i].value;
+                }
+            };
+            console.log(queryText);
+            sendRequest(queryText);
+            // var companyName = document.getElementById('nameInput').value;   
+            // var reqSuccess = await sendRequestASYNC('profile', fillProfile, companyName);
+            // console.log(companyName + ' reqSuccess = ' + reqSuccess);  
+            
+            // if (reqSuccess){
+            // validSearch();
+            // let tabconents = {'stock':fillStock, 'trend':fillTrend, 'news':fillNews, 'charts':fillCharts};          
+            // for (const [tabconent, fillFunction] of Object.entries(tabconents)) {
+            //     sendRequest(tabconent, fillFunction, companyName); 
+            // };
+            // }else{
+            // invalidSearch();
+            // }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Pin USC</h1>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    
+    <form class="checkboxWrapper" onsubmit="clickSubmit();return false">
+        <div class="chechboxs">
+            <input class="checkbox" type="checkbox" value="resturant"> Resturant</input>
+            <input class="checkbox" type="checkbox"  value="seating"> Seating</input>
+        </div>
+        <div class="chechboxs">
+            <input class="checkbox" type="checkbox" value="outlet"> Outlet</input>
+            <input class="checkbox" type="checkbox"  value="indoor"> Indoor</input>
+            <input class="checkbox" type="checkbox"  value="outdoor"> Outdoor</input>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" value="Submit"></button>
+    </form>
+    
+    <div id="map"></div>
+    <script src="../static/js/main.js"> </script>
+
+</body>
+
+</html>
